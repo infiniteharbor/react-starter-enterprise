@@ -1,7 +1,6 @@
 // Core
 const webpack = require('webpack');
 const path = require('path');
-const fs = require('fs');
 
 // Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,11 +9,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // Utils
-import { devOrProd, getAliasesForDir } from './webpack.utils';
+const webpackUtils = require('./webpack.utils');
+const devOrProd = webpackUtils.devOrProd;
+const getAliasesForDir = webpackUtils.getAliasesForDir;
 
 const aliases = getAliasesForDir('./app/src/');
 aliases['lodash'] = __dirname + '/node_modules/lodash';
 aliases['moment'] = __dirname + '/node_modules/moment';
+
+
+/**
+ * DEFINE RULES
+ */
 
 const babelRule = {
   test: /\.jsx?$/,
@@ -24,7 +30,7 @@ const babelRule = {
 
 const styleRule = {
   test: /\.(s*)css$/,
-  use: [].concat([
+  use: [MiniCssExtractPlugin.loader].concat([
     {
       loader: 'css-loader',
       options: devOrProd(
@@ -49,7 +55,7 @@ const otherImagesRule = {
   test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/,
   loader: 'file-loader',
   options: { publicPath: '' },
-  exclude: ['node_modules']
+  exclude: /node_modules/
 };
 
 const typescriptRule = {
@@ -67,7 +73,9 @@ const svgRule = {
   options: { publicPath: '' }
 };
 
-
+/**
+ * EXPORT BASE CONFIG
+ */
 module.exports = {
   devtool: devOrProd('inline-source-map', 'cheap-module-source-map'),
   context: __dirname,
@@ -95,12 +103,12 @@ module.exports = {
       VERSION: JSON.stringify(require('./package.json').version)
     }),
     new webpack.NamedModulesPlugin(),
-    new CleanWebpackPlugin(['dist', 'build'], {}),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,
       filename: 'index.html',
-      template: './app/src/index.html.ejs',
+      template: '!!raw-loader!app/src/index.html.ejs',
       chunks: [ 'app', 'vendor', 'styles' ],
       chunksSortMode: 'none'
     }),
@@ -110,12 +118,19 @@ module.exports = {
   optimization: {
     noEmitOnErrors: true,
     splitChunks: {
-      cacheGroups: {
-        test: /[\\/]node_modules[\\/].*.js$/,
-        chunks: 'initial',
-        name: 'vendor',
-        priority: 10,
-        enforce: true
+      cacheGroups: {  
+        vendor: {
+          test: /[\\/]node_modules[\\/].*.js$/,
+          chunks: 'initial',
+          name: 'vendor',
+          priority: 10,
+          enforce: true
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
       }
     }
   },

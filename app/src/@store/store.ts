@@ -17,6 +17,8 @@ const configureStore = (config: AppConfig) => {
       store.replaceReducer(nextRootReducer);
     });
   }
+
+  return store;
 };
 
 export default configureStore;

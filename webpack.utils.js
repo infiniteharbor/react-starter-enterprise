@@ -3,9 +3,9 @@
 /**
  * ENVIRONMENT CONSTANTS
  */
-export const NODE_ENV_DEVELOPMENT = 'development';
-export const NODE_ENV_PRODUCTION = 'development';
-export const NODE_ENV = process.env.NODE_ENV || NODE_ENV_DEVELOPMENT;
+const NODE_ENV_DEVELOPMENT = 'development';
+const NODE_ENV_PRODUCTION = 'development';
+const NODE_ENV = process.env.NODE_ENV || NODE_ENV_DEVELOPMENT;
 
 /**
  * Detect if the environment doesn't match the configured environments
@@ -18,26 +18,26 @@ if(![NODE_ENV_DEVELOPMENT, NODE_ENV_PRODUCTION].includes(NODE_ENV)) {
 /**
  * ENVIRONMENT UTILS
  */
-export function isDev()  {
+function isDev()  {
   return getNodeEnv() === NODE_ENV_DEVELOPMENT;
 }
 
-export function isProd() {
+function isProd() {
   return getNodeEnv() === NODE_ENV_PRODUCTION;
 }
 
-export function getNodeEnv() {
+function getNodeEnv() {
   return NODE_ENV || NODE_ENV_DEVELOPMENT;
 }
 
-export function devOrProd(dev, prod) {
+function devOrProd(dev, prod) {
   return isDev() ? dev : prod;
 }
 
 /**
  * PATH UTILS
  */
-export function getAliasesForDir(dir) {
+function getAliasesForDir(dir) {
   const dirs = require('fs').readdirSync(dir);
   const path = require('path');
   const aliases = dirs.reduce( (acc, subDir) => {
@@ -45,4 +45,19 @@ export function getAliasesForDir(dir) {
     return acc;
   }, {});
   return aliases;
+}
+
+
+/**
+ * EXPORT 
+ */
+module.exports = {
+  NODE_ENV_DEVELOPMENT,
+  NODE_ENV_PRODUCTION,
+  NODE_ENV,
+  isDev,
+  isProd,
+  getNodeEnv,
+  devOrProd,
+  getAliasesForDir,
 }

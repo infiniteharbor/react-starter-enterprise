@@ -17,4 +17,5 @@ module.exports = ((baseConfig) => {
     }
   }
   baseConfig.mode = 'development';
+  return baseConfig;
 })(webpackBaseConfig);

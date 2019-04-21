@@ -26,7 +26,6 @@ module.exports = ((baseConfig) => {
   // Additional Plugins
   config.plugins = config.plugins.concat([
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new BundleAnalyzerPlugin({ analyzerMode: 'static', reportFilename: 'bundleAnalysis.html', openAnalyzer: false }),
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       canPrint: true,
@@ -63,4 +62,5 @@ module.exports = ((baseConfig) => {
   ]
 
   config.mode = 'production';
+  return config;
 })(webpackBaseConfig);
