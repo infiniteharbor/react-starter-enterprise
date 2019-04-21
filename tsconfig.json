@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "baseUrl": "./",
+    "outDir": "./build",
+    "sourceMap": true,
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "module": "esNext",
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "removeComments": false,
+    "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "es2017",
+      "dom",
+      "es6"
+    ],
+    "types": [
+      "react",
+      "node"
+    ],
+    "paths": {
+      "~*": [
+        "app/src/*"
+      ],
+      "~@*": [
+        "app/src/@*"
+      ]
+    }
+  },
+  "include": [
+    "app/src/**/*",
+    "__tests__/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

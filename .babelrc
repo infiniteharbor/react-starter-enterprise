@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    "react-hot-loader/babel",
+    "@babel/plugin-proposal-object-rest-spread",
+    "lodash"
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": 6,
+          "chrome": "57"
+        }
+      }
+    ],
+    "@babel/react"
+  ]
+}

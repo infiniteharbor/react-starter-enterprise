@@ -1,0 +1,58 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "quotemark": [ true, "single", "avoid-escape" ],
+    "no-empty": [ true, "allow-empty-catch", "allow-empty-functions" ], 
+    "indent": [ true, "spaces", 2 ],
+    "no-consecutive-blank-lines": [ true, 2 ],
+    "curly": [ true, "ignore-same-line" ],
+    "semicolon": [ true, "always", "ignore-bound-class-methods" ],
+    "no-console": [ true, "log" ],
+    "triple-equals": [ true, "allow-null-check", "allow-undefined-check" ],
+    "variable-name": [ true, "ban-keywords", "check-format", "allow-pascal-case", "allow-leading-underscore" ],
+    "no-unused-expression": [ true, "allow-fast-null-checks" ],
+    "max-line-length": [ 
+      true, 
+      {
+        "limit": 160,
+        "ignore-pattern": "//" 
+      } 
+    ],
+    "no-commented-code": [ 
+      true, 
+      { 
+        "minLineCount": 2,
+        "ignoredCommentRegex": "^(\\w+$|TODO|FIXME)"
+      } 
+    ],
+    "whitespace": [ 
+      true,
+      "check-branch",
+      "check-decl",
+      "check-module",
+      "check-operator",
+      "check-preblock",
+      "check-rest-spread",
+      "check-separator",
+      "check-type",
+      "check-typecast",
+      "check-type-operator"
+    ],
+    "trailing-comma": false,
+    "no-identical-functions": false,
+    "object-literal-sort-keys": false,
+    "no-duplicate-switch-case": false,
+    "no-irregular-whitespace": false,
+    "max-classes-per-file": false,
+    "prefer-object-spread": false,
+    "no-duplicate-imports": false,
+    "no-duplicate-variable": false,
+    "ordered-imports": false,
+    "interface-name": false,
+    "member-access": false,
+    "arrow-parens": false,
+    "ban-types": false
+  }
+}
